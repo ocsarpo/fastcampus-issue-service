@@ -60,4 +60,8 @@ class IssueService(
         }
     }
 
+    @Transactional
+    fun delete(id: Long) {
+        issueEntityRepository.deleteById(id)
+    }
 }
