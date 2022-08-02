@@ -1,6 +1,7 @@
 package fastcampus.issueservice.model
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import fastcampus.issueservice.domain.CommentEntity
 import fastcampus.issueservice.domain.IssueEntity
 import fastcampus.issueservice.domain.enums.IssuePriority
 import fastcampus.issueservice.domain.enums.IssueStatus
@@ -17,6 +18,7 @@ data class IssueRequest(
 
 data class IssueResponse(
     val id: Long,
+    val comments: List<CommentResponse>,
     val summary: String,
     val description: String,
     val userId: Long,
@@ -35,6 +37,7 @@ data class IssueResponse(
             with(issueEntity) {
                 IssueResponse(
                     id = id!!,
+                    comments = commentEntityList.sortedByDescending(CommentEntity::id).map(CommentEntity::toResponse),
                     userId = userId,
                     summary = summary,
                     description = description,
