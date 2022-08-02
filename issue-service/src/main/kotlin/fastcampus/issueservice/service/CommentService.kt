@@ -37,4 +37,11 @@ class CommentService(
         issueEntity.commentEntityList.add(comment)
         return commentRepository.save(comment).toResponse()
     }
+
+    @Transactional
+    fun edit(id: Long, userId: Long, request: CommentRequest): CommentResponse? =
+        commentRepository.findByIdAndUserId(id, userId)?.run {
+            body = request.body
+            commentRepository.save(this).toResponse()
+        }
 }
