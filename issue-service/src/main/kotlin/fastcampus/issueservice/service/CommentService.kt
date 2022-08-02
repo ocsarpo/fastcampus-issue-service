@@ -44,4 +44,14 @@ class CommentService(
             body = request.body
             commentRepository.save(this).toResponse()
         }
+
+    @Transactional
+    fun delete(issueId: Long, id: Long, userId: Long) {
+        val issueEntity = issueRepository.findByIdOrNull(issueId) ?: throw NotFoundException("이슈가 존재하지 않습니다")
+
+        commentRepository.findByIdAndUserId(id, userId)?.let { commentEntity ->
+            // 트랜잭션이 끝날 때 delete 쿼리가 발생함.
+            issueEntity.commentEntityList.remove(commentEntity)
+        }
+    }
 }
