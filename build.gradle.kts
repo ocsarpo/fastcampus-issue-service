@@ -6,6 +6,8 @@ plugins {
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
 	kotlin("plugin.jpa") version "1.6.21"
+
+	kotlin("kapt") version "1.6.21"
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_17
@@ -23,6 +25,8 @@ subprojects {
 	apply(plugin = "kotlin")
 	apply(plugin = "kotlin-spring")
 	apply(plugin = "io.spring.dependency-management")
+
+	apply(plugin = "kotlin-kapt")
 	// 인증 서비스는 웹플럭스 기반 스프링데이터 R2DBC 를 사용할 것이라 jpa 플러그인을 apply 하지 않음.
 	// 실제 사용하는 이슈서비스 모듈에서 jpa 플러그인을 실행할 예정.
 
