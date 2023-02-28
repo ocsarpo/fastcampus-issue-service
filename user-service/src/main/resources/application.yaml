@@ -1,2 +1,8 @@
 server:
   port: 9090
+
+jwt:
+  issuer: fake-jira
+  subject: auth
+  expires-time: 3600 # 1시간
+  secret: my-secret
